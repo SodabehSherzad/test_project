@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-import 'model.dart';
+import 'home.dart';
+import 'category.dart';
+import 'sub_category.dart';
 
 class DatabaseHelper {
 
@@ -43,20 +45,26 @@ class DatabaseHelper {
   Future<String> getHomeData() async {
     String query = "SELECT * FROM home";
     var res = await database.rawQuery(query);
-    Model model = res.isNotEmpty ? Model.fromMapObject(res.first): null;
+    Home model = res.isNotEmpty ? Home.fromMapObject(res.first): null;
     // print("_____________________" + res.toString());
     return model.body;
     // return model;
   }
 
   //for multi rows
-  Future<List<Model>> getCategories() async {
+  Future<List<Category>> getCategories() async {
     String query = "SELECT * FROM category";
     var res = await database.rawQuery(query);
-    List<Model> list = res.isNotEmpty ? res.map((e) => Model.toMapObject(e)).toList(): [];
+    List<Category> list = res.isNotEmpty ? res.map((e) => Category.fromMapObject(e)).toList(): [];
     return list;
   }
 
+  Future<List<SubCategory>> getSubCategories() async {
+    String query = "SELECT * FROM subCategory, category where category.id == subCategory.category_id";
+    var res = await database.rawQuery(query);
+    List<SubCategory> list = res.isNotEmpty ? res.map((e) => SubCategory.fromMapObject(e)).toList(): [];
+    return list;
+  }
 
   Future closeDB() async{
     database.close();
