@@ -1,5 +1,7 @@
-class Category {
+import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 
+class Category {
   //these variables are for category table
   int _category_id;
   String _name, _image;
@@ -16,5 +18,22 @@ class Category {
     this._name = map['name'];
     this._image = map['image'];
   }
+}
 
+class CategoryPro with ChangeNotifier {
+  List<Category> _categories;
+  List<Category> get categories {
+    return [..._categories];
+  }
+
+  //for multi rows
+  Future<void> getCategories(Database database) async {
+    String query = "SELECT * FROM category";
+    var res = await database.rawQuery(query);
+    List<Category> list = res.isNotEmpty
+        ? res.map((e) => Category.fromMapObject(e)).toList()
+        : [];
+    _categories = list;
+    notifyListeners();
+  }
 }

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import './classes/category.dart';
+import './classes/sub_category.dart';
 import 'pages/home_page.dart';
+import './pages/category_page.dart';
+import './classes/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +16,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   //I need to declare my database here for loading data from database
   // And use the variable of database to other pages
 
@@ -19,9 +23,17 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (_) => HomeProvider(), child: HomePage()),
+        ChangeNotifierProvider(create: (_) => CategoryPro(), child: HomePage()),
+        ChangeNotifierProvider(create: (_) => SubCatePro(), child: HomePage()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+      ),
     );
   }
 }
