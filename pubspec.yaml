@@ -23,9 +23,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  shared_preferences: ^0.5.6+3
+  flutter_html: ^0.8.2
   carousel_pro: ^0.0.13
   sqflite: ^1.1.7+3
   path_provider: any
+  provider: ^4.3.2+3
+  flutter_svg: ^0.18.0
+  #  share_plus: any
+  share: ^0.6.2+3
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -35,6 +43,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^0.3.2
+flutter_icons:
+  image_path: "images/ic_launcher.png"
+  android: true
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -55,6 +68,8 @@ flutter:
     - images/face/
     - images/hair/
     - images/nail/
+    - lib/languages/fa.json
+    - lib/languages/en.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

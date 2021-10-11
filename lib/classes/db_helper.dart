@@ -9,29 +9,28 @@ import 'category.dart';
 import 'sub_category.dart';
 
 class DatabaseHelper {
-
   Database database;
 
-  Future initDb() async{
+  Future initDb() async {
     final dbPath = await getDatabasesPath();
     final String path = join(dbPath, 'makeup.db');
 
     final exist = await databaseExists(path);
 
-    if(exist){
+    if (exist) {
       print("db exist");
 
       database = await openDatabase(path);
-
-    }else{
+    } else {
       print("db copy");
 
-      try{
+      try {
         await Directory(dirname(path)).create(recursive: true);
-      }catch(_){}
+      } catch (_) {}
 
       ByteData data = await rootBundle.load(join('assets', 'makeup.db'));
-      List<int> bytes = data.buffer.asInt8List(data.offsetInBytes, data.lengthInBytes);
+      List<int> bytes =
+      data.buffer.asInt8List(data.offsetInBytes, data.lengthInBytes);
 
       await File(path).writeAsBytes(bytes, flush: true);
 
@@ -41,32 +40,7 @@ class DatabaseHelper {
     database = await openDatabase(path);
   }
 
-  // for one row
-  Future<String> getHomeData() async {
-    String query = "SELECT * FROM home";
-    var res = await database.rawQuery(query);
-    Home model = res.isNotEmpty ? Home.fromMapObject(res.first): null;
-    // print("_____________________" + res.toString());
-    return model.body;
-    // return model;
-  }
-
-  //for multi rows
-  Future<List<Category>> getCategories() async {
-    String query = "SELECT * FROM category";
-    var res = await database.rawQuery(query);
-    List<Category> list = res.isNotEmpty ? res.map((e) => Category.fromMapObject(e)).toList(): [];
-    return list;
-  }
-
-  Future<List<SubCategory>> getSubCategories() async {
-    String query = "SELECT * FROM subCategory, category where category.id == subCategory.category_id";
-    var res = await database.rawQuery(query);
-    List<SubCategory> list = res.isNotEmpty ? res.map((e) => SubCategory.fromMapObject(e)).toList(): [];
-    return list;
-  }
-
-  Future closeDB() async{
+  Future closeDB() async {
     database.close();
   }
 }
