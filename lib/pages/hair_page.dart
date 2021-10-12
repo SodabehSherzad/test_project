@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/components/top_navigation.dart';
 
 import 'category_page.dart';
 
@@ -11,8 +10,6 @@ class HairPage extends StatefulWidget {
 }
 
 class _HairPageState extends State<HairPage> {
-
-  //For **does not work database to get data and show them here**, I used list to show data
 
   List<String> listName = ['Long Hair', 'Medium Hair', 'Short Hair'];
   String detail = '''Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.

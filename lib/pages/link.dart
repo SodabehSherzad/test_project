@@ -16,8 +16,8 @@ class _LinkPageState extends State<LinkPage> {
   List<Item> generateItems(int numberOfItems) {
     return List.generate(numberOfItems, (int index) {
       return Item(
-        headerValue: 'Book $index',
-        expandedValue: 'Details for Book $index goes here',
+        headerValue: ' آرایش شماره $index',
+        expandedValue: ' جزییات آریش شماره $index',
       );
     });
   }
@@ -36,7 +36,8 @@ class _LinkPageState extends State<LinkPage> {
           child: ListView(
             children: [ExpansionPanelList(
               expansionCallback: (int index, bool isExpanded) {
-                //Not working to expand data of body
+                //***Not working to expand data of body***
+                //***Flutter ExpansionPanelList not support localization to data rtl/ltr***
                 setState(() {
                   _books[index].isExpanded = !_books[index].isExpanded;
                 });
