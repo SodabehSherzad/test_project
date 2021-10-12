@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:share/share.dart';
 import 'package:test_project/classes/db_helper.dart';
 import 'package:test_project/components/bottom_navigation.dart';
@@ -52,13 +53,6 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    //For **does not work database to get data and show them here**, I used list to show data
-    // List<String> listName = [
-    //   'Face',
-    //   'Hair',
-    //   'Nail'
-    // ];
-    // List<String> listIcon = ['face','hair','nail'];
 
     final cates = Provider.of<CategoryPro>(context).categories;
     final List<String> listName = cates.map((item) => item.name).toList();
@@ -81,11 +75,11 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 
   openPage(BuildContext context, int index, List<Category> categories) {
-    //selecting category id for FacePage.
     var id =
         categories.firstWhere((element) => element.name == "Face").category_id;
     switch (index) {
-      //If share app information from social media in this way**
+
+      //**If share app information from social media in this way**
     // but does not work
       case 0:
         final RenderBox box = context.findRenderObject();
@@ -96,21 +90,21 @@ class _CategoryPageState extends State<CategoryPage> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => FacePage(id),
+              builder: (context) => HairPage(),
             ));
         break;
       case 2:
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HairPage(),
+              builder: (context) => NailPage(),
             ));
         break;
       case 3:
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NailPage(),
+              builder: (context) => FacePage(id),
             ));
         break;
     }

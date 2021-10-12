@@ -10,6 +10,11 @@ import 'classes/home.dart';
 import 'localization/demo_localization.dart';
 import 'localization/language_constants.dart';
 
+import './classes/category.dart';
+import './classes/sub_category.dart';
+import 'pages/home_page.dart';
+import './classes/home.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -41,7 +46,6 @@ class _MyAppState extends State<MyApp> {
     });
     super.didChangeDependencies();
   }
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

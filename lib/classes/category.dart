@@ -22,6 +22,7 @@ class Category {
 
 class CategoryPro with ChangeNotifier {
   List<Category> _categories;
+
   List<Category> get categories {
     return [..._categories];
   }
@@ -29,6 +30,7 @@ class CategoryPro with ChangeNotifier {
   //for multi rows
   Future<void> getCategories(Database database) async {
     String query = "SELECT * FROM category_fa";
+
     var res = await database.rawQuery(query);
     List<Category> list = res.isNotEmpty
         ? res.map((e) => Category.fromMapObject(e)).toList()

@@ -33,7 +33,7 @@ class SubCatePro with ChangeNotifier {
 
   Future<void> getSubCategories(Database database, int categId) async {
     String query =
-        "SELECT subCategory.id, subCategory.title, subCategory.image, subCategory.detail, subCategory.category_id FROM subCategory, category where category.id == subCategory.category_id and $categId == subCategory.category_id";
+        "SELECT subCategory_fa.id, subCategory_fa.title, subCategory_fa.image, subCategory_fa.detail, subCategory_fa.category_id FROM subCategory_fa, category_fa where category_fa.id == subCategory_fa.category_id and $categId == subCategory_fa.category_id";
     var res = await database.rawQuery(query);
     List<SubCategory> list = res.isNotEmpty
         ? res.map((e) => SubCategory.fromMapObject(e)).toList()

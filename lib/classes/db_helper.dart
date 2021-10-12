@@ -30,6 +30,7 @@ class DatabaseHelper {
 
       ByteData data = await rootBundle.load(join('assets', 'makeup.db'));
       List<int> bytes =
+
       data.buffer.asInt8List(data.offsetInBytes, data.lengthInBytes);
 
       await File(path).writeAsBytes(bytes, flush: true);
